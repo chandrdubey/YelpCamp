@@ -1,0 +1,68 @@
+<%- include ("../partials/header") %>
+<div class="container">
+    <div class="row page-style" >
+        <div class="col-md-4">
+            <div >
+                <img class="img-circle img-fluid img-responsives" src="<%= user.avatar %> " alt="">
+            </div>
+            
+        </div>
+        <div class="col-md-8">
+          <div class="obj-inline">
+            <strong class="user-head"><%= user.username %></strong>
+            <% if(!currentUser){ %> 
+            <span><a class="btn btn-primary user-span" href="/follow/<%= user._id %>">Follow</a></span>
+            <% }else if(!user._id.equals(currentUser._id)){ %>        
+            <%   if(user.followers.includes(currentUser._id)){  %> 
+                   <span><a class="btn btn-primary user-span" href="/unfollow/<%= user._id %>">Unfollow</a></span>      
+                <% }else{ %>  
+                  <span><a class="btn btn-primary user-span" href="/follow/<%= user._id %>" >Follow</a></span>
+                <% } %> 
+          <% }else{ %> 
+                  <span class="float-right"> <a class="icon-style" href="/users/<%=user.id%>/edit" ><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
+          <% } %>        
+          </div>
+          <p>
+            <span class="user-campNum"><%= campgrounds.length %>  campgrounds </span>
+            <span class="user-span"> <%= user.followers.length %>  followers </span>
+            <span class="user-span"> <%= user.followings.length %> followings  </span>
+          </p>        
+          <p><%=user.firstName%>
+           <% if(user.lastName){ %> 
+              <%=user.lastName %>
+            <% } %> 
+           </p>
+           <strong>About</strong>
+           <p>
+              <%= user.description %> 
+           </p>
+           <strong>Email Id:</strong>
+           <p>
+              <%= user.email %> 
+           </p>
+        </div>      
+    </div>
+    <div style="padding:30px; padding-top: 10px;">
+        <h4 class="text-center user-head"><%= user.username %>'s campgrounds </h4>
+        <hr>
+        <div class="row text-center" >
+            <% campgrounds.forEach(function(m){ %>
+       
+                <div class="col-md-3 col-sm-6 ">
+                    <div class="card" style="width: 16rem;  margin-right:10px;">
+                        <img class="card-img-top" src="<%= m.image %>" alt="Card image cap">
+                        <div class="card-body">
+                          <h5 class="card-title"> <%= m.name %> </h5>
+                          <a href="/campgrounds/<%=m._id %>" class="btn btn-primary">more info</a>
+                        </div>
+                      </div>
+                </div> 
+            <% }); %>
+     </div>
+    </div>
+    
+
+</div>
+
+
+<%- include ("../partials/footer") %>

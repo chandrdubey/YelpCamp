@@ -1,0 +1,85 @@
+.img-thumbnail img {
+    width: 100%;
+    
+}
+
+.img-thumbnail{
+    padding: 0;
+}
+.x{
+    padding: 9px;
+}
+.jumbotron{
+    background-image: url("https://images.unsplash.com/photo-1526491109672-74740652b963?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80");
+    background-size: cover;
+    margin-top:20px;
+}
+.obj-inline{
+    display: inline;
+}
+#delete-comment{
+    display: inline;
+}
+.navb{
+    padding-left: 150px;
+    padding-right: 150px;
+      
+}
+.jumbotron{
+    text-align: center;
+}
+a.navbar-brand.h1{
+   margin: 0 auto;
+}
+nav ul li a{
+    color: rgb(58, 161, 58);
+}
+.user-head{
+    font-size: 1.2rem;
+}
+.img-circle{
+    border-radius: 10%;
+}
+.profile-picture
+{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+  
+}
+a.icon-style{
+    text-decoration: none; 
+    color: inherit;
+}
+.user-span{
+    padding:6px;
+    margin-left:10px;
+    font-weight: 600;
+}
+.user-subhead{
+    font-weight: 600;
+}
+i{
+    font-size: x-large;
+}
+.page-style{
+    margin:30px auto ;
+    padding : 30px;
+     padding-bottom: 0;
+}
+.text-center{
+    text-align: center;
+    margin-top: 20px;
+}
+.form-style{
+    width: 30%; 
+    margin:25px auto;
+}
+.auth-style{
+    width: 25%;
+    margin:25px auto;
+}
+.rating{
+    font-size: 40px;
+    color: grey;
+}

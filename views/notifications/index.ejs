@@ -1,0 +1,31 @@
+<%- include ("../partials/header") %>
+  <div class="container">
+    <h4 class="text-center ">View all the notifications</h4>
+    <hr>
+    <div>
+        <% allnotifications.forEach(function( notification) {%>
+          <div row>
+            <% if(notification.campgroundId){ %> 
+              <a class="icon-style" href="/campgrounds/<%= notification.campgroundId  %> " >
+                  <strong> <%= notification.username %>  </strong>
+                    <span> created a new campground.   </span> 
+                  </a>
+                 <% }else {%>
+                  <a class="icon-style" href="/users/<%= notification.userId %> " >
+                  <strong> <%= notification.username %>  </strong>
+                  <p>Started following you.</p>
+                 </a>
+                  <% } %> 
+                  <hr>
+          </div>
+           
+            
+        <% }) %> 
+    </div>
+  </div>
+  
+
+
+
+
+<%- include ("../partials/footer") %>
