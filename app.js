@@ -31,9 +31,11 @@ client.connect(err => {
   // perform actions on the collection object
   client.close();
 });   */
-console.log(process.env.MONGODB_URL);
+//let mongoDB = process.env.MONGODB_URL;
+let mongoDB =  'mongodb://localhost:27017/yelp_camp_v13';
+//console.log(process.env.MONGODB_URL);
 //var mongoDB = 'mongodb+srv://highly:dbyelpcamp@yelpcamp-mzmvq.mongodb.net/test?retryWrites=true&w=majorit';
-mongoose.connect(process.env.MONGODB_URL,{ useNewUrlParser: true,useUnifiedTopology: true  });
+mongoose.connect(mongoDB,{ useNewUrlParser: true,useUnifiedTopology: true  });
 const db=mongoose.connection;
 
 db.on('error', console.log.bind('Error in connecting to the Database'));
