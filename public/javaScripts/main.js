@@ -33,8 +33,8 @@ $(document).ready(function(){
       for (i = 0; i < onStar; i++) {
         $(stars[i]).addClass('selected');
       }
-      //document.getElementById("stars").value = stars.length;
-      document.getElementById("rating-form").submit();
+    //   document.getElementById("rating-form").value = stars.length;
+    //   document.getElementById("rating-form").submit();
     });
   
 });

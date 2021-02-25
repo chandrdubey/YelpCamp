@@ -102,7 +102,7 @@ router.get("/new",middleware.isLoggedIn,function(req,res){
 //show-more info about the campgrounds
   
 router.get("/:id",async (req,res)=>{
-     let found = await Campground.findById(req.params.id).populate("comments").exec();
+     let found = await Campground.findById(req.params.id).populate("comments").populate("reviews").exec();
    
      if(found){
          console.log(found);
@@ -167,11 +167,7 @@ router.delete("/:id",middleware.CampgroundOwnerShip,  function(req,res){
      });
 });
 
-// Campground rating 
-router.post("/:id/rating", async(req, res)=>{
-     console.log("hello");
-     console.log(req.body);
-})
+
 //Fuzzy Search
 function escapeRegex(text) {
    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");

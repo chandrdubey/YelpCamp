@@ -2,7 +2,6 @@ var express= require("express");
 var router=express.Router();
 var User=require("../models/user");
 var Notification =require("../models/notification");
-const { findById } = require("../models/comment");
 
 //Handle Notification
 router.get('/notifications/:id', async function(req,res){

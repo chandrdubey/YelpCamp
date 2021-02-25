@@ -7,7 +7,10 @@ var campgroundSchema= new mongoose.Schema({
     price: String,
     imageId: String,
     description: String,
+    city:String,
     createdAt: { type: Date, default: Date.now },
+    rating :{type: Number, default:0},
+    totalRating:{type: Number, default:0},
     author:{
       id: {
         type:mongoose.Schema.Types.ObjectId,
@@ -15,6 +18,12 @@ var campgroundSchema= new mongoose.Schema({
       },
       username: String
     },
+    reviews: [
+      {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Review"
+      }
+  ],
     comments:[
       {
        type:mongoose.Schema.Types.ObjectId,

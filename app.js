@@ -19,19 +19,8 @@ var commentRoutes = require("./routes/comment"),
     indexRoutes = require("./routes/authentication"),
     userRoutes = require("./routes/user"),
     followSystemRoutes = require("./routes/followSystem"),
-    notificationRoutes = require("./routes/notification");
-//seedDB();
-//Set up default mongoose connection
-//var mongoDB =  'mongodb://localhost:27017/yelp_camp_v13';
-/*
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://highly:dbyelpcamp@yelpcamp-mzmvq.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});   */
+    notificationRoutes = require("./routes/notification"),
+    reviewRoutes = require("./routes/review");
 //let mongoDB = process.env.MONGODB_URL;
 let mongoDB =  'mongodb://localhost:27017/yelp_camp_v13';
 //console.log(process.env.MONGODB_URL);
@@ -84,6 +73,7 @@ app.use("/campgrounds/:id/comments",commentRoutes);
 app.use("/users",userRoutes);
 app.use("/",followSystemRoutes);
 app.use("/",notificationRoutes);
+app.use("/campgrounds",reviewRoutes);
 
 
 app.listen(PORT,function(){

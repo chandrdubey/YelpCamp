@@ -155,25 +155,38 @@ border-radius: 4px;
   }
   
   /* Idle State of the stars */
-  .rating-stars ul > li.star > i.fa {
+  .rating-stars ul > li.star >label i.fa {
     font-size:2.5em; /* Change the size of the stars */
     color:#ccc; /* Color on idle state */
   }
   
   /* Hover state of the stars */
-  .rating-stars ul > li.star.hover > i.fa {
+  .rating-stars ul > li.star.hover > li label.fa {
     color:#FFCC36;
   }
   
   /* Selected state of the stars */
-  .rating-stars ul > li.star.selected > i.fa {
+  .rating-stars ul > li.star.selected >label i.fa {
     color:#FF912C;
   }
   
 #rating-form input{
     visibility: hidden;
     -webkit-appearance: none;
-  -moz-appearance: none;
+    -moz-appearance: none;
   appearance: none;
-
+}
+.bg{ 
+    background-color: #f8f9fa!important;
+    padding : 5px;
+    margin-top: 5px;
+}
+.review{
+    background: green; color : white;padding: 0 5px;
+}
+.all-review{
+    padding :5px;
+}
+.same-line{
+    display: inline;
 }

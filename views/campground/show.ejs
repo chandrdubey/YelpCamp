@@ -7,10 +7,13 @@
           <div class="x">
            <div class="row ">
              <div class="col ">
-               <h4><%= campground.name %></h4>
+               <h4><%= campground.name %>, <%= campground.city %>  </h4>
+               <% if(campground.rating>0){%> 
+                <span class="review" > <%= campground.rating %><i class='fa fa-star fa-fw'></i></span>
+                <% } %>
              </div>
              <div class="col ">
-               <h4 class="float-right">$<%= campground.price %>/night</h4>
+               <h4 class="float-right">₹<%= campground.price %>/night</h4>
              </div> 
            </div>
            <p> <%= campground.description %> </p>
@@ -38,7 +41,7 @@
              <div class="row">
                  <div class="col-md-12">
                    <strong><%= comment.author.username %></strong>
-                     <span class="float-right"><%=moment( comment.createdAt, "YYYYMMDD").fromNow() %></span>
+                     <span class="float-right"><%=moment(comment.createdAt, "YYYYMMDD").fromNow() %></span>
                    <p style="margin: 0;">         
                        <%= comment.text %> 
                    </p>
@@ -67,45 +70,72 @@
                  <span><i class="fa fa-star-o" aria-hidden="true"></i></span>
              </div>
          </div> -->
-         <div id="rating">
-          <header class='header text-center' style="padding: 0;">
-            <h5>Rate <%=campground.name %></h5>
+         <div id="rating" class="bg">        
+          <header class='header text-center ' style="padding: 0;">
+            <h5>Rate <%=campground.name  %> </h5>
         </header>
         
         <section class='rating-widget'>
           
           <!-- Rating Stars Box -->
           <div class='rating-stars text-center'>
-            <form  id="rating-form" action="/campgrounds/<%= campground._id%>/rating" method="POST">
-            <ul id='stars'  >
-            
+            <form  id="rating-form" action="/campgrounds/<%= campground._id%>/reviews" method="POST">
+            <ul id='stars'>
               <li class='star'  title='Poor' data-value='1' >
-                <input type="radio" name="rating"  value=1>
-                <i class='fa fa-star fa-fw'></i>
+                <label for="r1"><i class='fa fa-star fa-fw'></i></label>
+                <input type="radio" name="rating" value=1 id="r1" >
+                          
               </li>
               <li class='star'  title='Fair' data-value='2'>
-                <input type="radio" name="rating"  value=2>
-                <i class='fa fa-star fa-fw'></i>
+                <label for="r2"><i class='fa fa-star fa-fw'></i></label>
+                <input type="radio" name="rating" id="r2"  value=2 >
+                 
+                          
               </li>
               <li class='star' title='Good' data-value='3'>
-                <input type="radio" name="rating"  value=3>
-                <i class='fa fa-star fa-fw'></i>
+                <label for="r3"><i class='fa fa-star fa-fw'></i></label>
+                <input type="radio" name="rating" id="r3" value=3 >
               </li>
               <li class='star' title='Excellent' data-value='4'>
-                <input type="radio" name="rating"  value=4>
-                <i class='fa fa-star fa-fw'></i>
+                <label for="r4"><i class='fa fa-star fa-fw'></i></label>
+                <input type="radio" name="rating" id="r4"  value=4>
+               
               </li>
               <li class='star' title='WOW!!!' data-value='5'>
-                <input type="radio" name="rating"  value=5>
-                <i class='fa fa-star fa-fw'></i>
+                <label for="r5"><i class='fa fa-star fa-fw'></i></label>
+                <input type="radio" name="rating" id="r5"  value=5 >
+                
               </li>
             </ul>
-          </form>
+            <h5 for="">Write a review</h5>
+            <textarea rows="4" cols="40" name="review"></textarea>
+           
+            <button class="btn btn-primary ">Submit!</button>
           
-          <textarea rows="4" cols="50" name="comment" form="rating-form"></textarea>
+          </form>
+            
+        
+         
           </div>  
          </div> 
-
+         <div class="bg">
+           <div class="all-review">
+          <h5>Reviews</h5>
+          <hr>
+          <% if (campground.reviews.length == 0) { %>
+           <p>No Rating Yet</p>
+         <% } else { %>
+           <% campground.reviews.forEach(function(reviewItem){ %>
+            <div>
+            <span class="review " > <%=reviewItem.rating %><i class='fa fa-star fa-fw'></i></span>
+            <h6 class="m-0 same-line"><%= reviewItem.author.username %> </h6>
+            <p><%= reviewItem.review %></p>
+          </div>
+               
+               <hr>
+           <% }); }%> 
+       </div>
+      </div> 
          <% var count = 0; %>
          <% for(var camp of allCampgrounds){ %>
            <% if(count >= 10) { %>
