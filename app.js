@@ -9,7 +9,8 @@ var Campground          = require("./models/campgrounds");
 var Comment             = require("./models/comment");
 var flash               = require("connect-flash");
 var User                = require("./models/user");
-var seedDB              = require("./seed");
+var moment                  = require('moment');  //display dates and times in diffrent formats
+//var seedDB              = require("./seed");
 require('dotenv').config();
 var PORT   =  process.env.PORT || 3000;
 
@@ -37,7 +38,6 @@ let mongoDB =  'mongodb://localhost:27017/yelp_camp_v13';
 //var mongoDB = 'mongodb+srv://highly:dbyelpcamp@yelpcamp-mzmvq.mongodb.net/test?retryWrites=true&w=majorit';
 mongoose.connect(mongoDB,{ useNewUrlParser: true,useUnifiedTopology: true  });
 const db=mongoose.connection;
-
 db.on('error', console.log.bind('Error in connecting to the Database'));
 
 db.once('open', function()
@@ -53,7 +53,7 @@ app.use(flash());
 
 //PASSPORT CONFIGURATION
 app.use(require("express-session")({
-   secret:"gold",
+   secret:process.env.secret,
    resave: false,
    saveUninitialized:false
 }));
@@ -62,7 +62,7 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
+app.locals.moment = moment;
 app.use(async function(req,res,next){
       try{
          res.locals.currentUser=req.user;

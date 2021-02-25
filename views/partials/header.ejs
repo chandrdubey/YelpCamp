@@ -68,6 +68,7 @@
                             <% }else {%>
                                   started following you.
                             <% } %> 
+                            <span class="float-right"><%=moment( notification.createdAt, "YYYYMMDD").fromNow() %></span>
                             </a>
                             <div class="dropdown-divider"></div>
                       <% }); %>

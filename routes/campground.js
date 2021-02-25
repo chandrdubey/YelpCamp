@@ -101,15 +101,14 @@ router.get("/new",middleware.isLoggedIn,function(req,res){
 });
 //show-more info about the campgrounds
   
-router.get("/:id",function(req,res){
-     Campground.findById(req.params.id).populate("comments").exec(function(err,found){
-        if(err){
-           console.log(err);
-        }else{
-           console.log(found);
-           res.render("campground/show",{campground:found});
-        }
-     });
+router.get("/:id",async (req,res)=>{
+     let found = await Campground.findById(req.params.id).populate("comments").exec();
+   
+     if(found){
+         console.log(found);
+         let allCampgrounds =await Campground.find();
+         res.render("campground/show",{campground:found, allCampgrounds});
+      }
 });
 //EDIT->Campground routes
 router.get("/:id/edit",middleware.CampgroundOwnerShip,function(req,res){
@@ -167,6 +166,12 @@ router.delete("/:id",middleware.CampgroundOwnerShip,  function(req,res){
         }
      });
 });
+
+// Campground rating 
+router.post("/:id/rating", async(req, res)=>{
+     console.log("hello");
+     console.log(req.body);
+})
 //Fuzzy Search
 function escapeRegex(text) {
    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");

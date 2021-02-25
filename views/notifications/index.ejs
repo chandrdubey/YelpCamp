@@ -8,11 +8,13 @@
             <% if(notification.campgroundId){ %> 
               <a class="icon-style" href="/campgrounds/<%= notification.campgroundId  %> " >
                   <strong> <%= notification.username %>  </strong>
-                    <span> created a new campground.   </span> 
+                  <span class="float-right"><%=moment( notification.createdAt, "YYYYMMDD").fromNow() %></span>
+                    <p> created a new campground.   </p> 
                   </a>
                  <% }else {%>
                   <a class="icon-style" href="/users/<%= notification.userId %> " >
                   <strong> <%= notification.username %>  </strong>
+                  <span class="float-right"><%=moment( notification.createdAt, "YYYYMMDD").fromNow() %></span>
                   <p>Started following you.</p>
                  </a>
                   <% } %> 
