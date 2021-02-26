@@ -74,7 +74,9 @@ app.use("/users",userRoutes);
 app.use("/",followSystemRoutes);
 app.use("/",notificationRoutes);
 app.use("/campgrounds",reviewRoutes);
-
+// app.get('*', (req,res)=>{
+//    res.send("hello");
+// })
 
 app.listen(PORT,function(){
 console.log("running");

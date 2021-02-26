@@ -1,28 +1,32 @@
 <%- include ("../partials/header") %>
 
- <div class="container">
+ <div class="container page-styles">
      <header class="jumbotron">
        <h1 class="h1">Welcome to Yelpcamp!</h1>
        <p class="h5">View our handpicked campgrounds.</p>
        <p>
-          <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add new campground</a>
+          <a class="btn btn-primary" href="/campgrounds/new">Add new campground</a>
        </p>
 
       </header>
-     <div class="row text-center">
+     <div id="ind" class="row text-center mb-5 mx-auto justify-content-center">
         <% campgnd.forEach(function(m){ %>
    
-            <div class="col-md-3 col-sm-6 ">
-                <div class="card" style="width: 16rem;  margin-right:10px;">
+            <div class="  ">
+                <div class="card bg" >
                     <img class="card-img-top" src="<%= m.image %>" alt="Card image cap">
                     <div class="card-body">
-                      <h5 class="card-title"> <%= m.name %> </h5>
+                      <% if(m.rating>0){ %>
+                      <span class="review" > <%= m.rating %><i class='fa fa-star fa-fw'></i></span>
+                    <% } %> 
+                      <h5 class="card-title"> <%= m.name %> , <%= m.city%></h5>
+                      
                       <a href="/campgrounds/<%=m._id %>" class="btn btn-primary">more info</a>
                     </div>
                   </div>
             </div> 
         <% }); %>
- </div>
+ </di v>
 
 </div>
 <%- include ("../partials/footer") %>

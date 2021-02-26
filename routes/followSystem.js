@@ -19,7 +19,8 @@ router.get("/follow/:id", isLoggedIn, async function(req, res){
     var newNotification = {
       username : userFollowing.username,
       avatar   : userFollowing.avatar,
-      userId   : req.user._id
+      userId   : req.user._id,
+      typeOfN  : "follow"
     }
     var notification =await Notification.create(newNotification);
     userFollower.notifications.push(notification);

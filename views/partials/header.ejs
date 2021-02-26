@@ -31,7 +31,7 @@
 
     </head>
     <body>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light navb">
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light navb">
             <a class="navbar-brand h1"  href="/"><i class="fa fa-modx" aria-hidden="true"></i> Yelpcamp</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -62,13 +62,21 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">           
                       <% notifications.forEach(function(notification) { %>                          
                             <a class="dropdown-item" href="/notifications/<%= notification.id %>">
+                              <p>
                               <strong> <%= notification.username %></strong> 
-                              <% if(notification.campgroundId){ %> 
+                              <% if(notification.campgroundId){ if(notification.typeOfN ==="new campground"){%> 
                                   created a new campground.
-                            <% }else {%>
+                            <%}else if(notification.typeOfN ==="new review campground"){ %>
+                                  added review on your campground
+                          <%  }else if(notification.typeOfN ==="new review by user") {%>
+                                   has posted new review 
+                         <% }else if(notification.typeOfN ==="new comment campground"){%>
+                                  added comment on your campground
+                        <% }}else {%>
                                   started following you.
                             <% } %> 
                             <span class="float-right"><%=moment( notification.createdAt, "YYYYMMDD").fromNow() %></span>
+                          </p>
                             </a>
                             <div class="dropdown-divider"></div>
                       <% }); %>

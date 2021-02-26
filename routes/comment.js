@@ -3,7 +3,8 @@ var router=express.Router({mergeParams:true});
 var Campground=require("../models/campgrounds");
 var Comment=require("../models/comment");
 var middleware=require("../middleware");
-
+var Notification = require("../models/notification");
+var User=require("../models/user");
 
 //COMMENT-routes
 
@@ -24,13 +25,27 @@ router.get("/new",middleware.isLoggedIn,function(req,res){
        if(err){
           console.log(err);
        }else{
-         Comment.create(req.body.comment, function(err,comment){
+         Comment.create(req.body.comment, async function(err,comment){
     //        console.log("New User:"+ req.user.username);
             comment.author.id=req.user._id;
             comment.author.username=req.user.username;
             comment.save();
+             
             campground.comments.push(comment);
             campground.save();
+            let user  = await User.findById(req.user._id).exec();
+            let campgroundAuthor =await User.findById(campground.author.id).exec();
+            
+            var newCommentNotification = {
+               campgroundId: campground.id,
+               username: user.username,
+               avatar: user.avatar,
+               userId: req.user._id,
+               typeOfN: "new comment campground",
+             };
+             let newCommentN = await Notification.create(newCommentNotification);
+             campgroundAuthor.notifications.push(newCommentN);
+             campgroundAuthor.save();
             console.log(comment); 
             req.flash("success","Successfully added comment");
             res.redirect("/campgrounds/"+ campground._id);

@@ -80,7 +80,8 @@ router.post("/", middleware.isLoggedIn, upload.single('image'),async function(re
           campgroundId : campground.id,
           username     : user.username,
           avatar       : user.avatar,
-          userId       : req.user._id
+          userId       : req.user._id,
+          typeOfN      : 'new campground'
        }
        var notification = await Notification.create(newNotification);
        for(var follower of user.followers){

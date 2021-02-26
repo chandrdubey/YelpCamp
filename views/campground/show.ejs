@@ -1,5 +1,5 @@
 <%- include ("../partials/header") %>
- <div class="container">
+ <div class="container page-styles mb-3">
     <div class="row">
       <div class="col-md-8">
         <div class=" img-thumbnail "> 
@@ -10,7 +10,9 @@
                <h4><%= campground.name %>, <%= campground.city %>  </h4>
                <% if(campground.rating>0){%> 
                 <span class="review" > <%= campground.rating %><i class='fa fa-star fa-fw'></i></span>
-                <% } %>
+                <% }else{ %>
+                  <h6>No rating yet be the first one to rate</h6>
+                  <%  }          %> 
              </div>
              <div class="col ">
                <h4 class="float-right">₹<%= campground.price %>/night</h4>
@@ -122,13 +124,14 @@
            <div class="all-review">
           <h5>Reviews</h5>
           <hr>
-          <% if (campground.reviews.length == 0) { %>
-           <p>No Rating Yet</p>
+          <% if (campground.reviews.length === 0) { %>
+            <h6>No rating yet be the first one to rate</h6>  
          <% } else { %>
            <% campground.reviews.forEach(function(reviewItem){ %>
             <div>
             <span class="review " > <%=reviewItem.rating %><i class='fa fa-star fa-fw'></i></span>
-            <h6 class="m-0 same-line"><%= reviewItem.author.username %> </h6>
+            <a class="m-0 same-line" href="/users/<%= reviewItem.author.id %>"><%= reviewItem.author.username %> </a>
+  
             <p><%= reviewItem.review %></p>
           </div>
                
@@ -136,29 +139,7 @@
            <% }); }%> 
        </div>
       </div> 
-         <% var count = 0; %>
-         <% for(var camp of allCampgrounds){ %>
-           <% if(count >= 10) { %>
-             <% break; %>
-           <% } %>
-           <% if(camp._id == campground.id) { %>
-             <% continue; %>
-           <% } %>
-           <li class="list-group-item spot-list">
-             <div class="media ">
-               <div class="media-left">
-                 <img class="media-object sideshow-image" src="<%= camp.image %>" alt="...">
-               </div>
-               <div class="media-body">
-                 <h6 class="media-heading"><a href="/spots/<%= camp._id %>"><%= camp.name %></a></h6>
-                 <span class="short-side-description">
-                   <%- camp.description.substring(0, 55) %>
-                 </span>
-               </div>
-             </div>
-           </li>
-           <% count++; %>
-         <% } %>
+
   <!-- <p class="lead ">Yelpcamp</p>
             <div class="list-group">
                  <li class="list-group-item active">Info 1</li>

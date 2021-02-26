@@ -1,5 +1,5 @@
 <%- include ("../partials/header") %>
-<div class="container">
+<div class="container page-styles ">
     <div class="row page-style" >
         <div class="col-md-4">
             <div >
@@ -7,7 +7,7 @@
             </div>
             
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 bg p-3">
           <div class="obj-inline">
             <strong class="user-head"><%= user.username %></strong>
             <% if(!currentUser){ %> 
@@ -23,11 +23,11 @@
           <% } %>        
           </div>
           <p>
-            <span class="user-campNum"><%= campgrounds.length %>  campgrounds </span>
+             <span class="user-campNum" style="font-weight: 500;"><%= campgrounds.length %>  campgrounds </span>
             <span class="user-span"> <%= user.followers.length %>  followers </span>
             <span class="user-span"> <%= user.followings.length %> followings  </span>
           </p>        
-          <p><%=user.firstName%>
+          <p style="font-weight: 500;"><%=user.firstName%>
            <% if(user.lastName){ %> 
               <%=user.lastName %>
             <% } %> 
@@ -45,13 +45,16 @@
     <div style="padding:30px; padding-top: 10px;">
         <h4 class="text-center user-head"><%= user.username %>'s campgrounds </h4>
         <hr>
-        <div class="row text-center" >
+        <div id="ind" class="row text-center" >
             <% campgrounds.forEach(function(m){ %>
        
-                <div class="col-md-3 col-sm-6 ">
-                    <div class="card" style="width: 16rem;  margin-right:10px;">
+                <div class="">
+                    <div class="card bg" style="width: 16rem;  margin-right:10px;">
                         <img class="card-img-top" src="<%= m.image %>" alt="Card image cap">
                         <div class="card-body">
+                          <% if(m.rating>0){ %>
+                            <span class="review" > <%= m.rating %><i class='fa fa-star fa-fw'></i></span>
+                          <% } %> 
                           <h5 class="card-title"> <%= m.name %> </h5>
                           <a href="/campgrounds/<%=m._id %>" class="btn btn-primary">more info</a>
                         </div>
