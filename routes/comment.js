@@ -35,17 +35,19 @@ router.get("/new",middleware.isLoggedIn,function(req,res){
             campground.save();
             let user  = await User.findById(req.user._id).exec();
             let campgroundAuthor =await User.findById(campground.author.id).exec();
-            
-            var newCommentNotification = {
-               campgroundId: campground.id,
-               username: user.username,
-               avatar: user.avatar,
-               userId: req.user._id,
-               typeOfN: "new comment campground",
-             };
-             let newCommentN = await Notification.create(newCommentNotification);
-             campgroundAuthor.notifications.push(newCommentN);
-             campgroundAuthor.save();
+            if(!campground.author.id.equals(req.user._id)){
+               var newCommentNotification = {
+                  campgroundId: campground.id,
+                  username: user.username,
+                  avatar: user.avatar,
+                  userId: req.user._id,
+                  typeOfN: "new comment campground",
+                };
+                let newCommentN = await Notification.create(newCommentNotification);
+                campgroundAuthor.notifications.push(newCommentN);
+                campgroundAuthor.save();
+            }
+           
             console.log(comment); 
             req.flash("success","Successfully added comment");
             res.redirect("/campgrounds/"+ campground._id);

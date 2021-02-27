@@ -39,36 +39,50 @@
  router.get("/register",function(req,res){
     res.render("register");
  });
- router.post("/register",  upload.single('avatar'), function(req, res){
+ router.post("/register",  upload.single('avatar'),async function(req, res){
 
       console.log(req.path);
-      cloudinary.v2.uploader.upload(req.file.path, function(err, result){
-         if(err){
-            req.flash("error", err.message);
-            res.redirect("back");
-         }
-         var newUser = new User(
-            {
-               username  : req.body.username,
-               firstName : req.body.firstName,
-               lastName  : req.body.lastName,
-               avatar    : result.secure_url,
-               email     : req.body.email,
-               avatarId  : result.public_id
-            }
-         );
-         User.register(newUser, req.body.password,function(err,user){
+      if(req.body.password !== req.body.confirmpassword){
+         req.flash("error", "password and confirm password are not same");
+         return res.redirect("/register");
+      }
+      let user =await  User.find({username:req.body.username}).exec();
+      console.log(user);
+      if(user.length == 0){
+         cloudinary.v2.uploader.upload(req.file.path, function(err, result){
             if(err){
-               console.log(err);
                req.flash("error", err.message);
-               return res.redirect("/register");
+               res.redirect("back");
             }
-               passport.authenticate("local")(req,res,function(){
-               req.flash("success", "Welcome to YelpCamp "+ user.username);
-               res.redirect("/campgrounds");
-               });
+            var newUser = new User(
+               {
+                  username  : req.body.username,
+                  firstName : req.body.firstName,
+                  lastName  : req.body.lastName,
+                  avatar    : result.secure_url,
+                  email     : req.body.email,
+                  avatarId  : result.public_id,
+                  description:req.body.description
+               }
+            );
+            User.register(newUser, req.body.password,function(err,user){
+               if(err){
+                  console.log(err);
+                  req.flash("error", err.message);
+                  return res.redirect("/register");
+               }
+                  passport.authenticate("local")(req,res,function(){
+                  req.flash("success", "Welcome to YelpCamp "+ user.username);
+                  res.redirect("/campgrounds");
+                  });
+            });
          });
-      });
+      }
+      else{
+         req.flash("error", "This username already exist choose another username");
+         return res.redirect("/register");
+      }
+  
      
  });
  //Show- Login Page

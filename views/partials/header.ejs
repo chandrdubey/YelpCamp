@@ -31,7 +31,7 @@
 
     </head>
     <body>
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light navb">
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top mb-5 bg-light navb">
             <a class="navbar-brand h1"  href="/"><i class="fa fa-modx" aria-hidden="true"></i> Yelpcamp</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -95,12 +95,12 @@
             </nav>
             <div class="container">
             <% if(error && error.length>0){ %> 
-              <div class="alert alert-danger" role="alert">
+              <div id="err" class="alert alert-danger flash-mess"  role="alert">
                 <%= error %>
               </div>
             <% } %> 
             <% if(success && success.length>0){ %> 
-             <div class="alert alert-success" role="alert">
+             <div  class="alert alert-success flash-mess" role="alert">
               <%= success %>
              </div>
              <% } %> 

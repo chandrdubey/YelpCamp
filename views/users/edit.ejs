@@ -1,7 +1,7 @@
 <%- include ("../partials/header") %>
 <div class="container page-styles">
 
-<div class="form-style justify-content-center  p-3 bg ">
+<div class="justify-content-center  p-3 bg ">
    <h1 class="text-center">Edit <%=user.username%></h1>
 <form action="/users/<%= user._id %>?_method=PUT"  method="POST"  enctype="multipart/form-data">
      <input type="hidden" name="_method" value="PUT">

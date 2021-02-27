@@ -21,7 +21,8 @@ let reviewSchema = new mongoose.Schema({
     campGround: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Campground"
-    }
+    },
+    createdAt: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model("Review", reviewSchema);

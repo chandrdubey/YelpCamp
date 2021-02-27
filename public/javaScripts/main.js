@@ -36,5 +36,10 @@ $(document).ready(function(){
     //   document.getElementById("rating-form").value = stars.length;
     //   document.getElementById("rating-form").submit();
     });
-  
+});
+$("document").ready(function(){
+  setTimeout(function(){
+     $(".alert").remove();
+  }, 3000 ); // 5 secs
+
 });

@@ -42,24 +42,25 @@
            </p>
         </div>      
     </div>
-    <div style="padding:30px; padding-top: 10px;">
+    <div class="mb-4" style=" padding-top: 10px;">
         <h4 class="text-center user-head"><%= user.username %>'s campgrounds </h4>
         <hr>
         <div id="ind" class="row text-center justify-content-center"  >
             <% campgrounds.forEach(function(m){ %>
        
-                <div class="">
+              <a href="/campgrounds/<%=m._id %>" class="icon-style" >
                     <div class="card bg" style="width: 16rem;  margin-right:10px;">
                         <img class="card-img-top" src="<%= m.image %>" alt="Card image cap">
                         <div class="card-body">
                           <% if(m.rating>0){ %>
                             <span class="review" > <%= m.rating %><i class='fa fa-star fa-fw'></i></span>
                           <% } %> 
-                           <h5 class="card-title"> <%= m.name %> </h5>
-                          <a href="/campgrounds/<%=m._id %>" class="btn btn-primary">more info</a>
+                           <h5 class="card-title"> <%= m.name %>, <%= m.city %>  </h5>
+                          
                         </div>
                       </div>
-                </div> 
+                    </a>
+                
             <% }); %>
      </div>
     </div>

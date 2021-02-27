@@ -8,7 +8,7 @@ var Review = require("../models/review");
 var Notification = require("../models/notification");
 //  middleware.isLoggedIn
 // Campground rating
-router.post("/:id/reviews", async (req, res) => {
+router.post("/:id/reviews", middleware.isLoggedIn, async (req, res) => {
   try {
     // console.log(req.params);
     let campground = await Campground.findById(req.params.id)
