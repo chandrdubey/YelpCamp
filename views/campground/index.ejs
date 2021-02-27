@@ -11,22 +11,20 @@
       </header>
      <div id="ind" class="row text-center mb-5 mx-auto justify-content-center">
         <% campgnd.forEach(function(m){ %>
-   
-            <div class="  ">
+          <a href="/campgrounds/<%=m._id %>" class="icon-style" >
                 <div class="card bg" >
                     <img class="card-img-top" src="<%= m.image %>" alt="Card image cap">
                     <div class="card-body">
                       <% if(m.rating>0){ %>
                       <span class="review" > <%= m.rating %><i class='fa fa-star fa-fw'></i></span>
                     <% } %> 
-                      <h5 class="card-title"> <%= m.name %> , <%= m.city%></h5>
-                      
-                      <a href="/campgrounds/<%=m._id %>" class="btn btn-primary">more info</a>
+                      <h5 class="card-title"> <%= m.name %> , <%= m.city%></h5>     
                     </div>
                   </div>
-            </div> 
+              </a>
+            
         <% }); %>
- </di v>
+ </div>
 
 </div>
 <%- include ("../partials/footer") %>

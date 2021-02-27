@@ -5,7 +5,9 @@ var User=require("../models/user");
 var Notification=require("../models/notification");
 var middleware=require("../middleware");
 var multer = require('multer');
+// require('dotenv').config();
 
+//console.log(process.env.cloudinary_cloud_name+  "h");
 var storage = multer.diskStorage({
   filename: function(req, file, callback) {
     callback(null, Date.now() + file.originalname);
@@ -22,9 +24,9 @@ var upload = multer({ storage: storage, fileFilter: imageFilter})
 
 var cloudinary = require('cloudinary');
 cloudinary.config({ 
-  cloud_name: 'imagehigh', 
-  api_key: '889884917544354', 
-  api_secret: 'MCmMuczRywCm5iKz5AX11lbPpDs'
+  cloud_name:process.env.cloudinary_cloud_name, 
+  api_key: process.env.cloudinary_api_key, 
+  api_secret: process.env.cloudinary_api_secret
 });
   //CAMPGROUNDS- show all campgrounds
 router.get("/",function(req,res)
@@ -32,7 +34,7 @@ router.get("/",function(req,res)
    if (req.query.search) {
      //Campground find on the basis of search
       const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-      Campground.find({name: regex},function(err,campgrounds){
+      Campground.find({$or: [{name: regex}, {city: regex}]},function(err,campgrounds){
          if(err){
             console.log(err);
          } else{  

@@ -6,15 +6,15 @@
           <img src="<%= campground.image %>" class="  "> 
           <div class="x">
            <div class="row ">
-             <div class="col ">
+             <div class="col-md-9">
                <h4><%= campground.name %>, <%= campground.city %>  </h4>
                <% if(campground.rating>0){%> 
                 <span class="review" > <%= campground.rating %><i class='fa fa-star fa-fw'></i></span>
                 <% }else{ %>
-                  <h6>No rating yet be the first one to rate</h6>
+                  <h6>No rating yet, be the first one to rate</h6>
                   <%  }          %> 
              </div>
-             <div class="col ">
+             <div class="col-md-3 ">
                <h4 class="float-right">₹<%= campground.price %>/night</h4>
              </div> 
            </div>
@@ -122,10 +122,10 @@
          </div> 
          <div class="bg">
            <div class="all-review">
-          <h5>Reviews</h5>
+          <h5>Reviews and ratings.</h5>
           <hr>
           <% if (campground.reviews.length === 0) { %>
-            <h6>No rating yet be the first one to rate</h6>  
+            <h6>No rating yet, be the first one to rate</h6>  
          <% } else { %>
            <% campground.reviews.forEach(function(reviewItem){ %>
             <div>

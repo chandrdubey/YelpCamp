@@ -45,7 +45,7 @@
     <div style="padding:30px; padding-top: 10px;">
         <h4 class="text-center user-head"><%= user.username %>'s campgrounds </h4>
         <hr>
-        <div id="ind" class="row text-center" >
+        <div id="ind" class="row text-center justify-content-center"  >
             <% campgrounds.forEach(function(m){ %>
        
                 <div class="">
@@ -55,7 +55,7 @@
                           <% if(m.rating>0){ %>
                             <span class="review" > <%= m.rating %><i class='fa fa-star fa-fw'></i></span>
                           <% } %> 
-                          <h5 class="card-title"> <%= m.name %> </h5>
+                           <h5 class="card-title"> <%= m.name %> </h5>
                           <a href="/campgrounds/<%=m._id %>" class="btn btn-primary">more info</a>
                         </div>
                       </div>
